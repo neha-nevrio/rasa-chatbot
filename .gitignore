@@ -1,0 +1,9 @@
+.rasa/*
+.rasa/cache/*
+models/*
+actions/__pycache__/*
+rasa_chatbot/*
+story_graph.dot
+rasa.db
+graph.html
+.env

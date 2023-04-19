@@ -1,0 +1,157 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - services
+  - mood_great
+  - health
+  - project
+  - timing
+  - connect
+  - client
+  - company
+  - thanks
+  - deny
+  - age
+  - bot_challenge
+  - more_info
+  - want_collaboration
+  - want_job
+  - full_name
+  - phone_number
+  - email_id
+
+
+
+forms:
+  info_form:
+    required_slots:
+        - full_name
+        - email_id
+        - phone_number
+
+slots:
+  full_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+        - active_loop: info_form
+          requested_slot: full_name
+  email_id:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+        - active_loop: info_form
+          requested_slot: email_id
+  phone_number:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+        - active_loop: info_form
+          requested_slot: phone_number
+
+
+responses:
+  utter_greet:
+  - text: "Hi, I am Nevrio_bot. How can I help you?"
+    buttons: 
+      - title: "Looking for Collaboration?"
+        payload: "/want_collaboration"
+      - title: "Looking for Services?"
+        payload: "/services"
+      - title: "Looking for Job?"
+        payload: "/want_job"
+
+  utter_info:
+  - text: For more info, you can visit our website {link}
+
+  utter_thanks:
+  - text: "My pleasure"
+  - text: "Happy to help"
+  - text: "Any time!"
+
+  utter_affirm:
+  - text: "Happy to help, Anything else I can do for you?"
+  - text: "Any time!, Anything else I can do for you?"
+
+  utter_services:
+  - text: "These are some of the services we provide - 'Web Development', 'Cloud Services', 'Mobile Apps', 'UI/UX & Graphic Design', 'Game Development', 'AR/VR Development'"
+
+  utter_timing:
+  - text: "Our office timings are 9 A.M - 6 P.M IST"
+  - text: "You can visit us between 9 A.M - 6 P.M IST"
+  - text: "You can meet us between 9 A.M - 6 P.M IST"
+
+  utter_connect:
+  - text: "You can connect with us: Email- id - preeti@nevrio.tech, deepak@nevrio.tech or call us - 9041959799"
+
+ 
+  utter_client:
+  - text: "We have worked with several clients from outside India as well as inside India. Its been 2 great years we have worked with and satisfied clients. For more information you can connect with us: Email- id - preeti@nevrio.tech, deepak@nevrio.tech or call us - 9041959799 "
+
+  utter_company:
+  - text: "Nevrio is service based startup. We have worked on many projects with many clients for 2 great years. We have team for Web, Gaming, VR/AR, AI/ML and Mobile App Develpment."
+
+  utter_project:
+  - text: "We have worked with several projects over 2 years. Some of our good projects are : 1. Foodle - A food order and delivery app. 2. GameMaster - A 2d Game. 3. POM - A dating app in flutter. 4.MDM - An android app for phone lock system."
+
+  utter_health:
+  - text: "I'm doing well, thanks for asking."
+  - text: "I'm feeling great"
+  - text: "I'm hanging in there, thanks for asking."
+  - text: "I'm doing pretty well, thanks for asking."
+  - text: "I'm doing pretty good, thanks for asking."
+  - text: "I'm feeling quite positive today, thanks for asking!"
+
+  utter_age:
+  - text: "I am 2 years old."
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+  - text: "It was nice talking to you, have a great day!"
+  - text: "See you later, thanks for visiting."
+
+  utter_iamabot:
+  - text: "I am a bot, built  by Nevrio."
+
+  utter_ask_full_name:
+  - text: "Your Full Name: "
+
+  utter_ask_email_id:
+  - text: "Thank you {full_name}. Please provide your Email ID: "
+
+  utter_ask_phone_number:
+  - text: "Your email id is {email_id}. Please provide your Contact Number: "
+  
+  utter_submit:
+  - text: Thank you for sharing for your details {full_name}. You can schedule an appointment with us here 👉 {link}
+
+  utter_response:
+  - text: We will get back to you as soon as possible.
+
+  utter_job_vacancy:
+  - text: Here are current openings.
+  
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+
+actions:
+- comapany_website_link
+- action_submit
+- validate_info_form
+- action_email
+- action_job
