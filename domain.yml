@@ -62,6 +62,7 @@ slots:
 responses:
   utter_greet:
   - text: "Hi, I am Nevrio_bot. How can I help you?"
+    image: "https://www.iconspng.com/images/simple-character-and-a-hi/simple-character-and-a-hi.jpg"
     buttons: 
       - title: "Looking for Collaboration?"
         payload: "/want_collaboration"
