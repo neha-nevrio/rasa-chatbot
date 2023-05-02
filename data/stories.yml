@@ -17,7 +17,7 @@ stories:
 - story: company_more_info
   steps:
   - intent: more_info
-  - action: comapany_website_link
+  - action: company_website_link
 
 - story: timing
   steps:
@@ -61,7 +61,7 @@ stories:
   - action: utter_client
 
 
-- story: collaboration
+- story: want_collaboration
   steps:
   - intent: greet
   - action: utter_greet

@@ -23,7 +23,10 @@ intents:
   - phone_number
   - email_id
 
-
+entities:
+  - full_name
+  - email_id
+  - phone_number
 
 forms:
   info_form:
@@ -62,7 +65,6 @@ slots:
 responses:
   utter_greet:
   - text: "Hi, I am Nevrio_bot. How can I help you?"
-    image: "https://www.iconspng.com/images/simple-character-and-a-hi/simple-character-and-a-hi.jpg"
     buttons: 
       - title: "Looking for Collaboration?"
         payload: "/want_collaboration"
@@ -120,8 +122,11 @@ responses:
 
   utter_goodbye:
   - text: "Bye"
+    image: "https://www.seekpng.com/ima/u2t4r5o0o0w7y3y3/"
   - text: "It was nice talking to you, have a great day!"
+    image: "https://www.seekpng.com/ima/u2t4r5o0o0w7y3y3/"
   - text: "See you later, thanks for visiting."
+    image: "https://www.seekpng.com/ima/u2t4r5o0o0w7y3y3/"
 
   utter_iamabot:
   - text: "I am a bot, built  by Nevrio."
@@ -151,7 +156,7 @@ session_config:
 
 
 actions:
-- comapany_website_link
+- company_website_link
 - action_submit
 - validate_info_form
 - action_email
