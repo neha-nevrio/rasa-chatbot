@@ -74,7 +74,7 @@ responses:
         payload: "/want_job"
 
   utter_info:
-  - text: For more info, you can visit our website {link}
+  - text: For more info, you can visit our website <a href={link}>{link}</a>
 
   utter_thanks:
   - text: "My pleasure"
@@ -141,7 +141,7 @@ responses:
   - text: "Your email id is {email_id}. Please provide your Contact Number: "
   
   utter_submit:
-  - text: Thank you for sharing for your details {full_name}. You can schedule an appointment with us here 👉 {link}
+  - text: Thank you for sharing for your details {full_name}. You can schedule an appointment with us here 👉 <a href={link}>{link}</a>
 
   utter_response:
   - text: We will get back to you as soon as possible.
