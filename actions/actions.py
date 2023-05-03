@@ -141,10 +141,15 @@ class ActionJobHunt(Action):
         jobs = response.json()["jobs"]
 
         dispatcher.utter_message(response="utter_job_vacancy")
+        response_str = "Jobs:\n"
         for job in jobs:
-            dispatcher.utter_message(text="Job ID: " + json.dumps(job["id"]))
-            dispatcher.utter_message(text="Title: " + json.dumps(job["title"]))
-            dispatcher.utter_message(text="Description: " + json.dumps(job["description"]))
-            dispatcher.utter_message(text="Status: " + json.dumps(job["active"]))
+            response_str += "Job ID: {}\nTitle: {}\nDescription: {}\nStatus: {}\n\n".format(
+                json.dumps(job["id"]),
+                json.dumps(job["title"]),
+                json.dumps(job["description"]),
+                json.dumps(job["active"])
+            )
+
+        dispatcher.utter_message(response_str)
 
         return []

@@ -122,11 +122,11 @@ responses:
 
   utter_goodbye:
   - text: "Bye"
-    image: "https://www.seekpng.com/ima/u2t4r5o0o0w7y3y3/"
+    image: "https://englishlive.ef.com/blog/wp-content/uploads/sites/2/2014/10/19.alternative-ways-to-say-goodbye.jpg"
   - text: "It was nice talking to you, have a great day!"
-    image: "https://www.seekpng.com/ima/u2t4r5o0o0w7y3y3/"
+    image: "https://englishlive.ef.com/blog/wp-content/uploads/sites/2/2014/10/19.alternative-ways-to-say-goodbye.jpg"
   - text: "See you later, thanks for visiting."
-    image: "https://www.seekpng.com/ima/u2t4r5o0o0w7y3y3/"
+    image: "https://englishlive.ef.com/blog/wp-content/uploads/sites/2/2014/10/19.alternative-ways-to-say-goodbye.jpg"
 
   utter_iamabot:
   - text: "I am a bot, built  by Nevrio."
