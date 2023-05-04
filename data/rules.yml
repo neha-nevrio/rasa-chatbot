@@ -33,7 +33,7 @@ rules:
   - slot_was_set:
     - requested_slot: null
   - action: action_submit
-  - action: action_email
+#  - action: action_email
   - action: utter_response
 
 

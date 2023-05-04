@@ -11,6 +11,7 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
+from rasa_sdk.events import SlotSet
 import smtplib
 import re
 import os
@@ -31,6 +32,10 @@ class ActionHelloWorld(Action):
         dispatcher.utter_template("utter_info", tracker, link=Link)
 
         return []
+
+
+
+
 
 
 class ValidateInfoForm(FormValidationAction):
@@ -76,22 +81,39 @@ class ValidateInfoForm(FormValidationAction):
 
 
 # Creating new class to send emails.
-class ActionEmail(Action):
+# class ActionEmail(Action):
+#
+#     def name(self) -> Text:
+#         # Name of the action
+#         return "action_email"
+#
+#     def run(
+#             self,
+#             dispatcher,
+#             tracker: Tracker,
+#             domain: "DomainDict"
+#     ) -> List[Dict[Text, Any]]:
+#         send_email(
+#             name=tracker.get_slot("full_name"),
+#             email=tracker.get_slot("email_id")
+#         )
+#
+#         return []
+
+
+class ActionSubmit(Action):
 
     def name(self) -> Text:
-        # Name of the action
-        return "action_email"
+        return "action_submit"
 
-    def run(
-            self,
-            dispatcher,
+    def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
-            domain: "DomainDict"
-    ) -> List[Dict[Text, Any]]:
-        send_email(
-            name=tracker.get_slot("full_name"),
-            email=tracker.get_slot("email_id")
-        )
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        full_name = tracker.get_slot("full_name")
+        email_id = tracker.get_slot("email_id")
+        phone_number = tracker.get_slot("phone_number")
+        Link = "https://calendly.com/nevrio"
+        dispatcher.utter_message(response="utter_submit", intent="want_collaboration", link=Link)
 
         return []
 
@@ -113,18 +135,7 @@ def send_email(name, email):
         print(e)
 
 
-class ActionSubmit(Action):
 
-    def name(self) -> Text:
-        return "action_submit"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        Link = "https://calendly.com/nevrio"
-        dispatcher.utter_template("utter_submit", tracker, tracker.get_slot("full_name"), link=Link)
-
-        return []
 
 
 class ActionJobHunt(Action):
