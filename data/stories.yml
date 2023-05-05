@@ -85,7 +85,6 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_submit
-#  - action: action_email
   - action: utter_response
 
 

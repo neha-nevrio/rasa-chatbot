@@ -11,7 +11,6 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
-from rasa_sdk.events import SlotSet
 import smtplib
 import re
 import os
@@ -36,48 +35,48 @@ class ActionHelloWorld(Action):
 
 
 
-
-
-class ValidateInfoForm(FormValidationAction):
-    def name(self) -> Text:
-        return "validate_info_form"
-
-    def validate_full_name(
-            self,
-            slot_value: Any,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: DomainDict,
-    ) -> Dict[Text, Any]:
-        """Validate `full_name` value."""
-
-        # If the name is super short, it might be wrong.
-        pattern = r'^[a-zA-Z]+([-\'\s][a-zA-Z]+)*$'
-        name = slot_value
-        if re.match(pattern, name) and len(name) >= 2:
-            return {"full_name": name}
-
-        dispatcher.utter_message(text=f"That's a very short name. I'm assuming you mis-spelled.")
-
-        return {"full_name": None}
-
-    def validate_email_id(
-            self,
-            slot_value: Any,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: DomainDict,
-    ) -> Dict[Text, Any]:
-        """Validate `email_id` value."""
-
-        regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-        email = slot_value
-        if re.match(regex, email):
-            return {"email_id": email}
-
-        dispatcher.utter_message(text=f"Please enter a valid email address.")
-
-        return {"email_id": None}
+#
+#
+# class ValidateInfoForm(FormValidationAction):
+#     def name(self) -> Text:
+#         return "validate_info_form"
+#
+#     def validate_full_name(
+#             self,
+#             slot_value: Any,
+#             dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: DomainDict,
+#     ) -> Dict[Text, Any]:
+#         """Validate `full_name` value."""
+#
+#         # If the name is super short, it might be wrong.
+#         pattern = r'^[a-zA-Z]+([-\'\s][a-zA-Z]+)*$'
+#         name = slot_value
+#         if re.match(pattern, name) and len(name) >= 2:
+#             return {"full_name": name}
+#
+#         dispatcher.utter_message(text=f"That's a very short name. I'm assuming you mis-spelled.")
+#
+#         return {"full_name": None}
+#
+#     def validate_email_id(
+#             self,
+#             slot_value: Any,
+#             dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: DomainDict,
+#     ) -> Dict[Text, Any]:
+#         """Validate `email_id` value."""
+#
+#         regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+#         email = slot_value
+#         if re.match(regex, email):
+#             return {"email_id": email}
+#
+#         dispatcher.utter_message(text=f"Please enter a valid email address.")
+#
+#         return {"email_id": None}
 
 
 # Creating new class to send emails.
@@ -101,6 +100,47 @@ class ValidateInfoForm(FormValidationAction):
 #         return []
 
 
+class ValidateInfoForm(FormValidationAction):
+
+    def name(self) -> Text:
+        return "validate_info_form"
+
+    def validate_full_name(
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        # custom validation logic here
+        pattern = r'^[a-zA-Z]+([-\'\s][a-zA-Z]+)*$'
+        name = slot_value
+        if re.match(pattern, name) and len(name) >= 2:
+            return {"full_name": name}
+
+        dispatcher.utter_message(text=f"That's a very short name. I'm assuming you mis-spelled.")
+        return {"full_name": None}
+
+    def validate_email_id(
+            self,
+            slot_value: Any,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        # custom validation logic here
+        regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        email = slot_value
+        if re.match(regex, email):
+            return {"email_id": email}
+
+        dispatcher.utter_message(text=f"Please enter a valid email address.")
+
+        return {"email_id": None}
+
+
+
+
 class ActionSubmit(Action):
 
     def name(self) -> Text:
@@ -113,10 +153,14 @@ class ActionSubmit(Action):
         email_id = tracker.get_slot("email_id")
         phone_number = tracker.get_slot("phone_number")
         Link = "https://calendly.com/nevrio"
-        dispatcher.utter_message(response="utter_submit", intent="want_collaboration", link=Link)
+        dispatcher.utter_message(response="utter_submit", link=Link,
+                                 metadata={
+                                     "full_name": {"intent": "full_name"},
+                                     "email_id": {"intent": "email_id"},
+                                     "phone_number": {"intent": "phone_number"},
+                                 },)
 
         return []
-
 
 def send_email(name, email):
     RecieveList = os.environ["RECEIV_EMAILID"].strip('][').split(', ')
@@ -129,10 +173,9 @@ def send_email(name, email):
             connection.sendmail(from_addr=os.environ["SENDER_EMAIL_ID"],
                                 to_addrs=RecieveList,
                                 msg=f"Subject: IMPORTANT! \n\nName - {name} Email_id- {email}")
-
-
     except Exception as e:
         print(e)
+
 
 
 
