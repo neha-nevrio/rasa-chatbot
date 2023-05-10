@@ -27,9 +27,9 @@ intents:
 forms:
   info_form:
     required_slots:
-        - full_name
-        - email_id
-        - phone_number
+      - full_name
+      - email_id
+      - phone_number
 
 slots:
   full_name:
@@ -131,7 +131,10 @@ responses:
   - text: "Your Full Name: "
 
   utter_ask_email_id:
-  - text: "Thank you {full_name}. Please provide your Email ID: "
+  - text: "{
+\"text\": \"Thank you {full_name}. Please provide your Email ID: \",
+\"intent\":\"email_id\"
+}"
 
   utter_ask_phone_number:
   - text: "Your email id is {email_id}. Please provide your Contact Number: "
@@ -144,7 +147,9 @@ responses:
 
   utter_job_vacancy:
   - text: Here are current openings.
-  
+
+
+
 
 session_config:
   session_expiration_time: 60

@@ -239,6 +239,8 @@ nlu:
     - My name is [Neha Kakkar] (full_name)
     - [Aadi Tuli](full_name)
     - [Preeti Patel](full_name)
+    - I [Jaadu] (full_name)
+    - Myself [Herry] (full_name)
     - [David Guetta](full_name)
     - [Ryoma Takeuchi](full_name)
     - [Leonardo DiCaprio](full_name)
@@ -264,3 +266,4 @@ nlu:
     - [example@gmail.com](email_id)
     - [neexampleha@live.com](email_id)
     - [example@yahoo-inc.com](email_id)
+    - My email is [john.doe@example.com](email_id)
