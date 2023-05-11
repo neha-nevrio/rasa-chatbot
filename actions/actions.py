@@ -18,7 +18,7 @@ import requests
 import json
 
 
-class ActionHelloWorld(Action):
+class Actionwebsitelink(Action):
 
     def name(self) -> Text:
         return "company_website_link"

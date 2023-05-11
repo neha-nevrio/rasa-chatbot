@@ -35,4 +35,9 @@ rules:
   - action: action_submit
   - action: utter_response
 
+- rule: Out of scope
+  steps:
+  - intent: nlu_fallback
+  - action: utter_out_of_scope
+
 

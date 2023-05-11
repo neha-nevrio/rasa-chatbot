@@ -267,3 +267,23 @@ nlu:
     - [neexampleha@live.com](email_id)
     - [example@yahoo-inc.com](email_id)
     - My email is [john.doe@example.com](email_id)
+
+- intent: file_upload
+  examples: |
+    - I want to upload my resume.
+    - I want to upload a file.
+    - I want to upload a document.
+    - I would like to share my CV.
+    - Resume
+    - CV
+    - file
+    - Document
+
+- intent: out_of_scope
+  examples: |
+    - I want to order food.
+    - What is in the menu?
+    - Who is the Prime Minister of India?
+    - I hate you.
+    - bgwmjd
+    - What is 5 + 9?

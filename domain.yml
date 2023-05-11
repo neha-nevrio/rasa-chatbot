@@ -22,7 +22,8 @@ intents:
   - full_name
   - phone_number
   - email_id
-
+  - out_of_scope
+  - file_upload
 
 forms:
   info_form:
@@ -145,7 +146,17 @@ responses:
   utter_job_vacancy:
   - text: Here are current openings.
 
+  utter_out_of_scope:
+  - text: Sorry, I didn't get what you said. Please rephrase what you said.
 
+  utter_file_upload:
+  - text: Upload your file here
+    buttons:
+      - title: "Upload your file"
+        payload: "/file_upload"
+
+  utter_submit_file:
+    - text: Thank you for uploading your file.
 
 
 session_config:
