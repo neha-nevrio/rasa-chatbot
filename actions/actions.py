@@ -130,8 +130,9 @@ class ValidateInfoForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         # custom validation logic here
         regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-        email = slot_value
-        if re.match(regex, email):
+        email = {'result' : f'Your email id is {slot_value}. Please provide your Contact Number:', 'intent':'email_id','email_val': slot_value}
+
+        if re.match(regex, email["email_val"]):
             return {"email_id": email}
 
         dispatcher.utter_message(text=f"Please enter a valid email address.")
