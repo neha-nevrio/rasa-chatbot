@@ -264,3 +264,10 @@ nlu:
     - [example@gmail.com](email_id)
     - [neexampleha@live.com](email_id)
     - [example@yahoo-inc.com](email_id)
+
+- intent: upload_file
+  examples: |
+    - I want to upload my resume.
+    - Upload resume.
+    - I want to share my documents.
+    - Upload file.S

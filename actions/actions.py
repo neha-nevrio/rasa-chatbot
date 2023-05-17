@@ -43,7 +43,7 @@ class AskForFullName(Action):
             tracker: Tracker, domain: Dict
     ) -> List[EventType]:
 
-        dispatcher.utter_message(response = "utter_ask_full_name")
+        dispatcher.utter_message(response = "utter_ask_full_name", attachment="full_name")
 
         return []
 
@@ -55,7 +55,7 @@ class AskForEmailID(Action):
     def run(
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[EventType]:
-        dispatcher.utter_message(response="utter_ask_email_id", full_name = tracker.get_slot("full_name"))
+        dispatcher.utter_message(response="utter_ask_email_id", full_name = tracker.get_slot("full_name"), attachment="email_id")
         return []
 
 
@@ -66,7 +66,7 @@ class AskForPhoneNumber(Action):
     def run(
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[EventType]:
-        dispatcher.utter_message(response="utter_ask_phone_number", email_id = tracker.get_slot("email_id"))
+        dispatcher.utter_message(response="utter_ask_phone_number", email_id = tracker.get_slot("email_id"), attachment="phone_number")
         return []
 
 

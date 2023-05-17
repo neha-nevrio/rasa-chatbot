@@ -102,6 +102,7 @@ stories:
   - action: utter_greet
   - intent: want_job
   - action: action_job
+  - action: utter_upload_file
 
 - story: bye
   steps:
