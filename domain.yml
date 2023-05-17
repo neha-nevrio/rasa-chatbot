@@ -139,7 +139,8 @@ responses:
 
   utter_ask_phone_number:
   - text: "Your email id is {email_id}. Please provide your Contact Number: "
-  
+
+
   utter_submit:
   - text: Thank you for sharing for your details {full_name}. You can schedule an appointment with us here 👉 <a href={link}>{link}</a>
 
@@ -161,3 +162,6 @@ actions:
 - validate_info_form
 - action_email
 - action_job
+- action_ask_full_name
+- action_ask_email_id
+- action_ask_phone_number

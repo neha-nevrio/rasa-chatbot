@@ -10,6 +10,7 @@
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import EventType
 from rasa_sdk.types import DomainDict
 import smtplib
 import re
@@ -30,6 +31,42 @@ class ActionHelloWorld(Action):
 
         dispatcher.utter_template("utter_info", tracker, link=Link)
 
+        return []
+
+
+class AskForFullName(Action):
+    def name(self) -> Text:
+        return "action_ask_full_name"
+
+    def run(
+            self, dispatcher: CollectingDispatcher,
+            tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+
+        dispatcher.utter_message(response = "utter_ask_full_name")
+
+        return []
+
+
+class AskForEmailID(Action):
+    def name(self) -> Text:
+        return "action_ask_email_id"
+
+    def run(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        dispatcher.utter_message(response="utter_ask_email_id", full_name = tracker.get_slot("full_name"))
+        return []
+
+
+class AskForPhoneNumber(Action):
+    def name(self) -> Text:
+        return "action_ask_phone_number"
+
+    def run(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+        dispatcher.utter_message(response="utter_ask_phone_number", email_id = tracker.get_slot("email_id"))
         return []
 
 
@@ -73,27 +110,6 @@ class ValidateInfoForm(FormValidationAction):
         dispatcher.utter_message(text=f"Please enter a valid email address.")
 
         return {"email_id": None}
-
-
-# Creating new class to send emails.
-class ActionEmail(Action):
-
-    def name(self) -> Text:
-        # Name of the action
-        return "action_email"
-
-    def run(
-            self,
-            dispatcher,
-            tracker: Tracker,
-            domain: "DomainDict"
-    ) -> List[Dict[Text, Any]]:
-        send_email(
-            name=tracker.get_slot("full_name"),
-            email=tracker.get_slot("email_id")
-        )
-
-        return []
 
 
 def send_email(name, email):

@@ -239,16 +239,16 @@ nlu:
     - My name is [Neha Kakkar] (full_name)
     - [Aadi Tuli](full_name)
     - [Preeti Patel](full_name)
-    - [David Guetta](full_name)
+    - [david guetta](full_name)
     - [Ryoma Takeuchi](full_name)
     - [Leonardo DiCaprio](full_name)
     - [Leonardo Vinci](full_name)
     - [Jacqueline Fernandez](full_name)
     - [Katrina Kaif](full_name)
     - [Aishwarya Rai](full_name)
-    - [Vincent](full_name)
+    - [vincent](full_name)
     - [Jenny](full_name)
-    - [Rachael](full_name)
+    - [rachael](full_name)
 
 - intent: phone_number
   examples: |
