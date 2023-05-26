@@ -114,7 +114,10 @@ stories:
   - intent: age
   - action: utter_age
 
-
+- story: default fallback
+  steps:
+    - intent: out_of_scope
+    - action: action_custom_fallback
 
   
   

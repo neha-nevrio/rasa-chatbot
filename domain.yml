@@ -23,6 +23,7 @@ intents:
   - phone_number
   - email_id
   - upload_file
+  - out_of_scope
 
 entities:
   - full_name
@@ -158,8 +159,10 @@ responses:
         payload: "upload_file"
 
   utter_default:
-    - text: I'm sorry, I didn't quite understand that. Could you rephrase?
-  
+    - text: I'm sorry, I didn't understand. Please try again..
+
+  utter_custom:
+    - text: Sorry please try again..
 
 session_config:
   session_expiration_time: 60
@@ -175,3 +178,4 @@ actions:
 - action_ask_full_name
 - action_ask_email_id
 - action_ask_phone_number
+- action_custom_fallback

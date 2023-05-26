@@ -270,4 +270,12 @@ nlu:
     - I want to upload my resume.
     - Upload resume.
     - I want to share my documents.
-    - Upload file.S
+    - Upload file.
+
+- intent: out_of_scope
+  examples: |
+    - Who is einstein?
+    - What is 2+ 2?
+    - Who is the first human on moon?
+    - What is the day today?
+    - I want to book a cab?

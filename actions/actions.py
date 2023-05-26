@@ -12,6 +12,12 @@ from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import EventType
 from rasa_sdk.types import DomainDict
+from rasa_sdk.events import UserUtteranceReverted
+from llama_index import SimpleDirectoryReader, GPTListIndex, GPTVectorStoreIndex, LLMPredictor, PromptHelper, \
+    ServiceContext, StorageContext, load_index_from_storage
+from langchain import OpenAI
+import sys
+import os
 import smtplib
 import re
 import os
@@ -169,3 +175,24 @@ class ActionJobHunt(Action):
         dispatcher.utter_message(response_str)
 
         return []
+
+
+
+class ActionCustomFallback(Action):
+    def name(self) -> Text:
+        return "action_custom_fallback"
+
+    # os.environ['OPENAI_API_KEY'] = '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'
+
+    def run(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        # tell the user they are being passed to a customer service agent
+        dispatcher.utter_message(text="I am passing you to a human...")
+        dispatcher.utter_message(response='utter_custom')
+
+        # pause the tracker so that the bot stops responding to user input
+        return [UserUtteranceReverted()]
