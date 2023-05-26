@@ -156,6 +156,9 @@ responses:
     buttons:
       - title: "Upload your file"
         payload: "upload_file"
+
+  utter_default:
+    - text: I'm sorry, I didn't quite understand that. Could you rephrase?
   
 
 session_config:
