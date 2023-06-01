@@ -12,10 +12,6 @@ rules:
   - intent: greet
   - action: utter_greet
 
-- rule: Say goodbye anytime the user deny
-  steps:
-  - intent: deny
-  - action: utter_goodbye
 
 - rule: Say 'I am a bot' anytime the user challenges
   steps:
@@ -38,7 +34,7 @@ rules:
   - slot_was_set:
     - requested_slot: null
   - action: action_submit
-  - action: action_email
+  - action: action_send_email
   - action: utter_response
 
 - rule: out-of-scope

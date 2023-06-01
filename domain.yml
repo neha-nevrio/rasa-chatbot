@@ -173,7 +173,7 @@ actions:
 - company_website_link
 - action_submit
 - validate_info_form
-- action_email
+- action_send_email
 - action_job
 - action_ask_full_name
 - action_ask_email_id

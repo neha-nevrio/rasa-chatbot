@@ -16,13 +16,14 @@ from rasa_sdk.events import UserUtteranceReverted
 from llama_index import SimpleDirectoryReader, GPTListIndex, GPTVectorStoreIndex, LLMPredictor, PromptHelper, \
     ServiceContext, StorageContext, load_index_from_storage
 from langchain import OpenAI
-import sys
-import os
+from dotenv import load_dotenv
 import smtplib
 import re
 import os
 import requests
 import json
+
+load_dotenv()
 
 
 class ActionHelloWorld(Action):
@@ -33,7 +34,7 @@ class ActionHelloWorld(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        Link = "https://nevrio.tech/"
+        Link = os.getenv('NEVRIO_LINK')
 
         dispatcher.utter_template("utter_info", tracker, link=Link)
 
@@ -48,8 +49,7 @@ class AskForFullName(Action):
             self, dispatcher: CollectingDispatcher,
             tracker: Tracker, domain: Dict
     ) -> List[EventType]:
-
-        dispatcher.utter_message(response = "utter_ask_full_name", attachment="full_name")
+        dispatcher.utter_message(response="utter_ask_full_name", attachment="full_name")
 
         return []
 
@@ -61,7 +61,8 @@ class AskForEmailID(Action):
     def run(
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[EventType]:
-        dispatcher.utter_message(response="utter_ask_email_id", full_name = tracker.get_slot("full_name"), attachment="email_id")
+        dispatcher.utter_message(response="utter_ask_email_id", full_name=tracker.get_slot("full_name"),
+                                 attachment="email_id")
         return []
 
 
@@ -72,7 +73,8 @@ class AskForPhoneNumber(Action):
     def run(
             self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[EventType]:
-        dispatcher.utter_message(response="utter_ask_phone_number", email_id = tracker.get_slot("email_id"), attachment="phone_number")
+        dispatcher.utter_message(response="utter_ask_phone_number", email_id=tracker.get_slot("email_id"),
+                                 attachment="phone_number")
         return []
 
 
@@ -118,21 +120,34 @@ class ValidateInfoForm(FormValidationAction):
         return {"email_id": None}
 
 
-def send_email(name, email):
-    RecieveList = os.environ["RECEIV_EMAILID"].strip('][').split(', ')
+class SendEmail(Action):
 
-    try:
+    def name(self) -> Text:
+        return "action_send_email"
 
-        with smtplib.SMTP("smtp.gmail.com") as connection:
-            connection.starttls()
-            connection.login(os.environ["SENDER_EMAIL_ID"], os.environ["PASSWORD"])
-            connection.sendmail(from_addr=os.environ["SENDER_EMAIL_ID"],
-                                to_addrs=RecieveList,
-                                msg=f"Subject: IMPORTANT! \n\nName - {name} Email_id- {email}")
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        full_name = tracker.get_slot("full_name")
+        email_id = tracker.get_slot("email_id")
+
+        try:
+
+            with smtplib.SMTP("smtp.gmail.com") as connection:
+                connection.starttls()
+                connection.login(os.getenv("SENDER_EMAIL_ID"), os.getenv("PASSWORD"))
+                to_address = os.getenv('RECEIV_EMAILID')
+                to_address = to_address.removeprefix('[').removesuffix(']').split(',')
+
+                for email in to_address:
+                    connection.sendmail(from_addr=os.getenv("SENDER_EMAIL_ID"),
+                                        to_addrs=email,
+                                        msg=f"Subject: IMPORTANT! \n\nName - {full_name} Email_id- {email_id}")
 
 
-    except Exception as e:
-        print(e)
+        except Exception as e:
+            print(e)
 
 
 class ActionSubmit(Action):
@@ -143,8 +158,8 @@ class ActionSubmit(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        Link = "https://calendly.com/nevrio"
-        dispatcher.utter_template("utter_submit", tracker, tracker.get_slot("full_name"), link=Link)
+        Link = os.getenv('CANLENDLY_LINK')
+        dispatcher.utter_message(response="utter_submit", full_name=tracker.get_slot("full_name"), link=Link)
 
         return []
 
@@ -177,12 +192,19 @@ class ActionJobHunt(Action):
         return []
 
 
+class OpenAIModel:
+    def answerMe(question):
+        storage_context = StorageContext.from_defaults(persist_dir='Store')
+        index = load_index_from_storage(storage_context)
+        query_engine = index.as_query_engine()
+        response2 = query_engine.query(question)
+
+        return response2
+
 
 class ActionCustomFallback(Action):
     def name(self) -> Text:
         return "action_custom_fallback"
-
-    # os.environ['OPENAI_API_KEY'] = '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'
 
     def run(
             self,
@@ -190,9 +212,9 @@ class ActionCustomFallback(Action):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        # tell the user they are being passed to a customer service agent
-        dispatcher.utter_message(text="I am passing you to a human...")
-        dispatcher.utter_message(response='utter_custom')
+        text = tracker.latest_message['text']
+        answer = OpenAIModel.answerMe(str(text))
 
-        # pause the tracker so that the bot stops responding to user input
+        dispatcher.utter_message(text=str(answer))
+
         return [UserUtteranceReverted()]
