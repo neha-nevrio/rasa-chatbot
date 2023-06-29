@@ -11,30 +11,19 @@ nlu:
     - hello there
     - good morning
     - good evening
-    - moin
     - hey there
-    - let's go
-    - goodmorning
-    - goodevening
     - good afternoon
 
 - intent: goodbye
   examples: |
-    - cu
-    - good by
+    - good bye
     - see you later
-    - good night
     - bye
     - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
 
 - intent: affirm
   examples: |
     - yes
-    - y
     - indeed
     - of course
     - that sounds good
@@ -46,156 +35,68 @@ nlu:
   examples: |
     - Thanks
     - Thank you
-    - Thanks a lot
     - That is helpful
-    - Thanks a bunch!
-    - Thanks for your support.
-    - I am so thankful for your help.
-    - You are the best, thank you.
-    - You have my sincerest thanks.
-    - You are amazing, thank you.
-    - That is incredibly thoughtful of you, thank you.
-    - I am deeply grateful.
-    - Many thanks for your assistance.
-    - Thank you for being so generous.
-    - Your assistance means a lot, thank you.
-
-- intent: mood_great
-  examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
 
 - intent: services
   examples: |
-    - What services do you provide?"
-    - What kind of services do you offer?
-    - Can you tell me about the services you provide?
-    - What are the different services you have available?
+    - What services do you provide?
     - What kind of work does company do?
     - What do you do?
-    - What types of services do you offer?
-    - Could you tell me about the services you provide?
-    - What are the services you specialize in?
-    - What kind of solutions do you offer for your clients?
-    - What services are available to clients like me?
-    - Can you describe your service offerings?
-    - In what areas do you provide services?
-    - What can I expect from this company?
-    - Could you give me an overview of the services you offer?
 
 - intent: health
   examples: |
-    - Hey there, how have you been?
-    - Hi, how is everything with you?
     - How are you?
     - What is up?
     - How are you doing?
-    - How are you feeling today?
-    - How is your day going so far?
-    - What is new with you today?
-    - How is everything with you today?
-    - What is the history of your projects?
 
 - intent: project
   examples: |
     - What projects have you worked on?
-    - What kind of projects have you been involved in?
     - Can you tell me about your past project experience?
     - What are some projects you have completed in the past?
-    - Could you give me an overview of your project history?",
-    - What types of projects have you worked on in the past?
-    - What are some of the most challenging projects you have worked on?
-    - What have been some of your favorite projects to work on?
-    - What was the most significant project you have been a part of?
-    - Which project are you most proud of?
-    - What are some examples of projects you have worked on that align with our organization's goals?
-    - Can you describe some of the projects you have been working on lately?
     - How many projects have you worked with?
-    - How would you summarize the projects you have completed in the past year?
-    - Can you walk me through a recent project you worked on?
 
 - intent: timing
   examples: |
+    - timing
     - At what time are you available?
-    - What are your timings?
     - When can we connect?
-    - At what time can I come to meet you?
-    - At what time should I contact you?
-    - What is your availability like?
-    - When would be a good time for us to connect?
-    - What times work for you?
     - Can you let me know your schedule?
-    - Are there any specific times you are available to meet?
 
 - intent: connect
   examples: |
     - How can we connect?
-    - What is your email address?
-    - What is your email address or mobile number?
+    - What is your email id?
+    - What is your mobile number?
     - what are your contact details?
     - How can I reach you out?
-    - How can we talk to each other?
-    - What is the best way for us to get in touch?
-    - How would you like to communicate moving forward?
-    - Can we exchange contact information to stay connected?
     - What is your preferred method of communication?
     - Would you like to connect via email, phone, or in person?
-    - Are there any specific communication tools you prefer to use?
     - Shall we schedule a call or meeting to discuss further?
     - How can I reach you if I need to get in touch urgently?
 
 - intent: client
   examples: |
     - How many clients have you worked with?
-    - Can you tell me how many clients you have worked with in the past?
     - How many clients have you helped so far?
-    - What is the number of clients you have had over the years?
-    - How extensive is your client list?
-    - Can you give me an idea of the volume of clients you have worked with?
-    - How many clients have you successfully served in the past?
-    - What is the count of your satisfied clients?
-    - How many clients have benefited from your expertise?
-    - How many clients have you had the pleasure of working with?
-    - What is the total number of clients that you have interacted with?
-    - What is the total number of clients you have worked with to date?
-    - How many clients have you had the privilege of working with?
-    - How many clients have entrusted you with their needs?
-    - What is the number of clients that you have served up to now?
     - How many clients are you currently working with?
-    - What is your client load like at the moment?
     - How many active clients do you have?
-    - How many clients do you have on your roster?
-    - What is the maximum number of clients you can handle?
 
 - intent: company
   examples: |
+    - introduction
     - Tell me about your company
     - What is the history of your company
     - What products or services does your company offer?
     - For how many years are you serving clients
     - What does your company do?
-    - can you tell me brief about your company
     - Can you give me an overview of your company?
-    - How long has your company been in business?
-    - Can you describe the company culture at your organization?
 
 - intent: age
   examples: |
+    - age
     - How old are you?
     - What is your age?
-    - When did you come in existence?
 
 - intent: bot_challenge
   examples: |
@@ -206,16 +107,14 @@ nlu:
 
 - intent: more_info
   examples: |
+    - more information
     - Tell me more
-    - Can you tell me more?
     - Give me more information
-    - I want to know more about your company
     - I would like to know more about your company
 
 - intent: deny
   examples: |
     - no
-    - n
     - nope
     - nah
     - nada
@@ -239,18 +138,16 @@ nlu:
     - My name is [Neha Kakkar] (full_name)
     - [Aadi Tuli](full_name)
     - [Preeti Patel](full_name)
-    - I [Jaadu] (full_name)
-    - Myself [Herry] (full_name)
-    - [David Guetta](full_name)
+    - [david guetta](full_name)
     - [Ryoma Takeuchi](full_name)
     - [Leonardo DiCaprio](full_name)
     - [Leonardo Vinci](full_name)
     - [Jacqueline Fernandez](full_name)
     - [Katrina Kaif](full_name)
     - [Aishwarya Rai](full_name)
-    - [Vincent](full_name)
+    - [vincent](full_name)
     - [Jenny](full_name)
-    - [Rachael](full_name)
+    - [rachael](full_name)
 
 - intent: phone_number
   examples: |
@@ -266,24 +163,18 @@ nlu:
     - [example@gmail.com](email_id)
     - [neexampleha@live.com](email_id)
     - [example@yahoo-inc.com](email_id)
-    - My email is [john.doe@example.com](email_id)
 
-- intent: file_upload
+- intent: upload_file
   examples: |
     - I want to upload my resume.
-    - I want to upload a file.
-    - I want to upload a document.
-    - I would like to share my CV.
-    - Resume
-    - CV
-    - file
-    - Document
+    - Upload resume.
+    - I want to share my documents.
+    - Upload file.
 
 - intent: out_of_scope
   examples: |
-    - I want to order food.
-    - What is in the menu?
-    - Who is the Prime Minister of India?
-    - I hate you.
-    - bgwmjd
-    - What is 5 + 9?
+    - Who is einstein?
+    - What is 2+ 2?
+    - Who is the first human on moon?
+    - What is the day today?
+    - I want to book a cab?

@@ -7,3 +7,4 @@ story_graph.dot
 rasa.db
 graph.html
 .env
+.idea/*

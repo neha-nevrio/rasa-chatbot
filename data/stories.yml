@@ -85,6 +85,7 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_submit
+  - action: action_send_email
   - action: utter_response
 
 
@@ -101,8 +102,7 @@ stories:
   - action: utter_greet
   - intent: want_job
   - action: action_job
-  - action: utter_file_upload
-  - action: utter_submit_file
+  - action: utter_upload_file
 
 - story: bye
   steps:
@@ -113,9 +113,12 @@ stories:
   steps:
   - intent: age
   - action: utter_age
-  
-  
-  
+
+- story: default fallback
+  steps:
+    - intent: out_of_scope
+    - action: action_custom_fallback
+
   
   
 
