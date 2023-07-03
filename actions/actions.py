@@ -138,12 +138,15 @@ class SendEmail(Action):
                 connection.starttls()
                 connection.login(os.getenv("SENDER_EMAIL_ID"), os.getenv("PASSWORD"))
                 to_address = os.getenv('RECEIV_EMAILID')
-                to_address = to_address.removeprefix('[').removesuffix(']').split(',')
+                # to_address = to_address.removesuffix('[').remove(']').split(',')
+                if to_address.startswith('[') and to_address.endswith(']'):
+                    new_to_address = to_address[1:len(to_address)]
+                    print(new_to_address)
 
                 for email in to_address:
                     connection.sendmail(from_addr=os.getenv("SENDER_EMAIL_ID"),
                                         to_addrs=email,
-                                        msg=f"Subject: IMPORTANT! \n\nName - {full_name} Email_id- {email_id}")
+                                    msg=f"Subject: IMPORTANT! \n\nName - {full_name} Email_id- {email_id}")
 
 
         except Exception as e:
