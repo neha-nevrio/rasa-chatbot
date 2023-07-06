@@ -97,7 +97,7 @@ class ValidateInfoForm(FormValidationAction):
         if re.match(pattern, name) and len(name) >= 2:
             return {"full_name": name}
 
-        dispatcher.utter_message(text=f"That's a very short name. I'm assuming you mis-spelled.")
+        dispatcher.utter_message(text=f"Please recheck your name.")
 
         return {"full_name": None}
 
@@ -138,10 +138,9 @@ class SendEmail(Action):
                 connection.starttls()
                 connection.login(os.getenv("SENDER_EMAIL_ID"), os.getenv("PASSWORD"))
                 to_address = os.getenv('RECEIV_EMAILID')
-                # to_address = to_address.removesuffix('[').remove(']').split(',')
-                if to_address.startswith('[') and to_address.endswith(']'):
-                    new_to_address = to_address[1:len(to_address)]
-                    print(new_to_address)
+                    
+                to_address = to_address[1:(len(to_address)-1)].split(',')
+                
 
                 for email in to_address:
                     connection.sendmail(from_addr=os.getenv("SENDER_EMAIL_ID"),
@@ -150,7 +149,7 @@ class SendEmail(Action):
 
 
         except Exception as e:
-            print(e)
+            return e
 
 
 class ActionSubmit(Action):
