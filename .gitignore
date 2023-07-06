@@ -6,5 +6,10 @@ rasa_chatbot/*
 story_graph.dot
 rasa.db
 graph.html
-.env
 .idea/*
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
+config.bat
+node_modules
