@@ -1,0 +1,2 @@
+# Actions rasa
+rasa==3.5.12

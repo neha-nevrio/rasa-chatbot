@@ -1,6 +1,6 @@
 .rasa/*
 .rasa/cache/*
-models/*
+old-models/*
 actions/__pycache__/*
 rasa_chatbot/*
 story_graph.dot

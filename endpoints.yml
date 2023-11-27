@@ -1,9 +1,9 @@
 # This file contains the different endpoints your bot can use.
 
-# Server where the models are pulled from.
+# Server where the old-models are pulled from.
 # https://rasa.com/docs/rasa/model-storage#fetching-models-from-a-server
 
-#models:
+#old-models:
 #  url: http://my-server.com/models/default_core@latest
 #  wait_time_between_pulls:  10   # [optional](default: 100)
 
@@ -11,14 +11,14 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 action_endpoint:
- url: "http://localhost:5055/webhook"
+ url: "http://action-server:5055/webhook"
 
 # Tracker store which is used to store the conversations.
 # By default the conversations are stored in memory.
 # https://rasa.com/docs/rasa/tracker-stores
 
-tracker_store:
-   type: sql
+#tracker_store:
+#   type: sql
 #    url: <host of the redis instance, e.g. localhost>
 #    port: <port of your redis instance, usually 6379>
 #    db: <number of your database within redis, e.g. 0>

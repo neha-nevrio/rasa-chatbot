@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+  nevrio-chatbot-rasa:
+    image: rasa/rasa:3.5.12-full
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - nevrio-network
+    ports:
+    - "5005:5005"
+    volumes:
+    - ./:/app
+    depends_on:
+      - action-server
+    command:
+    - run
+    - --enable-api
+    - --cors
+    - "*"
+    - --debug
+
+  action-server:
+    container_name: action-server
+    image: rasa/rasa-sdk:3.5.1
+    environment:
+      - OPENAI_API_KEY
+    networks:
+      - nevrio-network
+    build:
+      context: .
+      dockerfile: actions/Dockerfile
+    restart: on-failure
+    env_file:
+      - .env
+    ports:
+    - "5055:5055"
+    volumes:
+    - ./actions:/app/actions
+
+
+networks: { nevrio-network: {}}

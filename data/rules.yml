@@ -2,41 +2,6 @@ version: "3.1"
 
 rules:
 
-- rule: Say goodbye anytime the user says goodbye
-  steps:
-  - intent: goodbye
-  - action: utter_goodbye
-
-- rule: Utter greet whenever user greets
-  steps:
-  - intent: greet
-  - action: utter_greet
-
-
-- rule: Say 'I am a bot' anytime the user challenges
-  steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
-
-- rule: Activate Info Form
-  steps:
-  - intent: collaboration
-  - action: utter_company
-  - action: info_form
-  - active_loop: info_form
-
-- rule: Submit Info Form
-  condition:
-  - active_loop: info_form
-  steps:
-  - action: info_form
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  - action: action_submit
-  - action: action_send_email
-  - action: utter_response
-
 - rule: out-of-scope
   steps:
   - intent: out_of_scope

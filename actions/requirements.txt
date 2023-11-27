@@ -1,0 +1,13 @@
+# Actions rasa
+rasa_sdk==3.5.1
+typing
+
+# WebsiteScraping
+requests
+bs4
+
+# OpenAItrainingmodel
+llama-index==0.7.9
+openai==0.28
+python-dotenv
+pydantic==1.10.9
